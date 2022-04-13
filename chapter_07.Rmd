@@ -20,7 +20,20 @@ Exercises from [Variation: Unusual Values](https://r4ds.had.co.nz/exploratory-da
 
 1. Explore the distribution of each of the `x`, `y`, and `z` variables in `diamonds`. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
 
+ANSWER. It looks like the values in most of x & y are very similar, while the values of z are a bit smaller. Since most diamonds are cut to be round and relatively flat, I would assume `z` is the depth dimension when staring at the diamonds face, while `x` and `y` are the length and width, respectively.
+
 ```{r p_7.3.4.1}
+
+df_x_z <- diamonds %>% 
+  dplyr::select(x:z) %>% 
+  tidyr::pivot_longer(cols = dplyr::everything(), names_to = "var", values_to = "value")
+
+ggplot2::ggplot(df_x_z, ggplot2::aes(x = value)) +
+  ggplot2::geom_histogram(binwidth = .5) +
+  ggplot2::facet_wrap(facets = ggplot2::vars(var))
+  
+ggplot2::ggplot(df_x_z, ggplot2::aes(x = value, color = var)) +
+  geom_freqpoly(binwidth = .5)
 
 
 ```
@@ -28,16 +41,77 @@ Exercises from [Variation: Unusual Values](https://r4ds.had.co.nz/exploratory-da
 
 2. Explore the distribution of `price`. Do you discover anything unusual or surprising? (Hint: Carefully think about the `binwidth` and make sure you try a wide range of values.)
 
+ANSWER. There is a gap in price right around $1500, and the distribution afterwards is much flatter than at lower values. Could have something to do with the markets that are being catered to with diamonds of each price, or something about how less expensive stones are used in jewelery (e.g., as accent pieces).
+
 ```{r p_7.3.4.2}
 
+v_max_price <- dplyr::select(diamonds, price) %>% 
+  dplyr::summarise(max = max(price, na.rm = TRUE)) %>% 
+  purrr::as_vector()
 
+dplyr::select(diamonds, price) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = price)) +
+  ggplot2::geom_histogram(binwidth = 100) +
+  ggplot2::scale_x_continuous(labels = seq(0, v_max_price, 1000), breaks = seq(0, v_max_price, 1000))
 
 ```
 
 
 3. How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?
 
+ANSWER. This one is not clear. Might be some very small differences in distribution of cut or clarity. Hard to tell since there's only 20-some cases of 0.99 carat.
+
 ```{r p_7.3.4.3}
+
+diamonds %>% 
+  dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  dplyr::count(carat)
+
+# diamonds %>% 
+#   dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+#   tidyr::pivot_longer(depth:z, names_to = "var", values_to = "value") %>% 
+#   ggplot2::ggplot(ggplot2::aes(x = value)) + 
+#   ggplot2::geom_histogram() +
+#   ggplot2::facet_grid(rows = ggplot2::vars(var), cols = ggplot2::vars(carat))
+
+diamonds %>% 
+  dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = carat, fill = cut)) +
+  ggplot2::geom_bar(position = "dodge")
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+   ggplot2::ggplot(ggplot2::aes(x = carat, fill = color)) +
+  ggplot2::geom_bar(position = "dodge")
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+   ggplot2::ggplot(ggplot2::aes(x = carat, fill = clarity)) +
+  ggplot2::geom_bar(position = "dodge")
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = depth)) + 
+  ggplot2::geom_histogram(binwidth = .5) +
+  ggplot2::facet_grid(rows = ggplot2::vars(carat))
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = table)) + 
+  ggplot2::geom_histogram(binwidth = 1) +
+  ggplot2::facet_grid(rows = ggplot2::vars(carat))
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = price)) + 
+  ggplot2::geom_histogram(binwidth = 100) +
+  ggplot2::facet_grid(rows = ggplot2::vars(carat))
+
+diamonds %>% 
+    dplyr::filter(dplyr::between(carat, 0.99, 1)) %>% 
+  ggplot2::ggplot(ggplot2::aes(x = x)) + 
+  ggplot2::geom_histogram(binwidth = .1) +
+  ggplot2::facet_grid(rows = ggplot2::vars(carat))
 
 ```
 
