@@ -1,0 +1,171 @@
+---
+title: "7.3.4 Exercises"
+author: "Matt Wood"
+date: '2022-04-13'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+## 7.3.4 Exercises
+
+Exercises from [Variation: Unusual Values](https://r4ds.had.co.nz/exploratory-data-analysis.html#exercises-15).
+
+1. Explore the distribution of each of the `x`, `y`, and `z` variables in `diamonds`. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.
+
+```{r p_7.3.4.1}
+
+
+```
+
+
+2. Explore the distribution of `price`. Do you discover anything unusual or surprising? (Hint: Carefully think about the `binwidth` and make sure you try a wide range of values.)
+
+```{r p_7.3.4.2}
+
+
+
+```
+
+
+3. How many diamonds are 0.99 carat? How many are 1 carat? What do you think is the cause of the difference?
+
+```{r p_7.3.4.3}
+
+```
+
+
+4. Compare and contrast `coord_cartesian()` vs `xlim()` or `ylim()` when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?
+
+```{r p_7.3.4.4}
+
+```
+
+
+
+## 7.5.1.1 Exercises
+
+Exercises from [Covariation: A categorical and continuous variable](https://r4ds.had.co.nz/exploratory-data-analysis.html#exercises-17).
+
+
+1. Use what you’ve learned to improve the visualisation of the departure times of cancelled vs. non-cancelled flights.
+
+```{r p_7.5.1.1.1}
+
+```
+
+
+2. What variable in the `diamonds` dataset is most important for predicting the price of a diamond? How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?
+
+```{r p_7.5.1.1.2}
+
+```
+
+
+3. Install the ggstance package, and create a horizontal boxplot. How does this compare to using `coord_flip()`?
+
+```{r p_7.5.1.1.3}
+
+```
+
+
+4. One problem with boxplots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of “outlying values”. One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using `geom_lv()` to display the distribution of price vs cut. What do you learn? How do you interpret the plots?
+
+```{r p_7.5.1.1.4}
+
+```
+
+
+5. Compare and contrast geom_violin() with a facetted `geom_histogram()`, or a coloured `geom_freqpoly()`. What are the pros and cons of each method?
+
+```{r p_7.5.1.1.5}
+
+```
+
+
+6. If you have a small dataset, it’s sometimes useful to use `geom_jitter()` to see the relationship between a continuous and categorical variable. The `ggbeeswarm` package provides a number of methods similar to `geom_jitter()`. List them and briefly describe what each one does.
+
+```{r p_7.5.1.1.6}
+
+```
+
+
+1. Use what you’ve learned to improve the visualisation of the departure times of cancelled vs. non-cancelled flights.
+
+```{r p_7.5.1.1.1}
+
+```
+
+
+## 7.5.1.2 Exercises
+
+Exercises from [Covariation: Two categorical values](https://r4ds.had.co.nz/exploratory-data-analysis.html#exercises-18).
+
+
+1. How could you rescale the count dataset above to more clearly show the distribution of cut within colour, or colour within cut?
+
+```{r p_7.5.1.2.1}
+
+```
+
+
+2. Use `geom_tile()` together with dplyr to explore how average flight delays vary by destination and month of year. What makes the plot difficult to read? How could you improve it?
+
+```{r p_7.5.1.2.2}
+
+```
+
+
+3. Use what you’ve learned to improve the visualisation of the departure times of cancelled vs. non-cancelled flights.
+
+```{r p_7.5.1.2.3}
+
+```
+
+
+## 7.5.1.3 Exercises
+
+Exercises from [Covariation: Two continuous values](https://r4ds.had.co.nz/exploratory-data-analysis.html#exercises-19).
+
+
+1. Instead of summarising the conditional distribution with a boxplot, you could use a frequency polygon. What do you need to consider when using `cut_width()` vs `cut_number()`? How does that impact a visualisation of the 2d distribution of `carat` and `price`?
+
+
+```{r p_7.5.1.3.1}
+
+```
+
+
+2. Visualise the distribution of carat, partitioned by price.
+
+```{r p_7.5.1.3.2}
+
+```
+
+
+3. How does the price distribution of very large diamonds compare to small diamonds? Is it as you expect, or does it surprise you?
+
+
+```{r p_7.5.1.3.3}
+
+```
+
+
+4. Combine two of the techniques you’ve learned to visualise the combined distribution of cut, carat, and price.
+
+```{r p_7.5.1.3.4}
+
+```
+
+
+5. Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the plot below have an unusual combination of `x` and `y` values, which makes the points outliers even though their `x` and `y` values appear normal when examined separately.
+
+```{r p_7.5.1.3.5}
+
+```
+
+
