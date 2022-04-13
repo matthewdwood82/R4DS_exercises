@@ -9,6 +9,9 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(ggstance)
+library(ggbeeswarm)
+
 ```
 
 ## 7.3.4 Exercises
@@ -66,7 +69,7 @@ Exercises from [Covariation: A categorical and continuous variable](https://r4ds
 ```
 
 
-3. Install the ggstance package, and create a horizontal boxplot. How does this compare to using `coord_flip()`?
+3. Install the `ggstance` package, and create a horizontal boxplot. How does this compare to using `coord_flip()`?
 
 ```{r p_7.5.1.1.3}
 
